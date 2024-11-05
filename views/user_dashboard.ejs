@@ -1,0 +1,22 @@
+<%- include('header') %>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-5">
+            <div class="card text-center">
+                <div class="card-header">Welcome</div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Hello, <%= name ? name : "User" %>!
+                    </h5>
+                    <p class="card-text">
+                        Welcome to your dashboard. You are successfully logged
+                        in.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('footer') %>

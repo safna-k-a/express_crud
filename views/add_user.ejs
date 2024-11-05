@@ -1,0 +1,111 @@
+<%-include('header')-%>
+<div class="container">
+    <div class="sec row justify-content-center mt-3">
+        <div class="ms-2 col-5">
+            <div class="login">
+                <% if (typeof msg !== 'undefined' && msg) { %>
+                <div class="alert alert-danger" id="alert-msg" role="alert">
+                    <%= msg %>
+                </div>
+                <% } %>
+                <form
+                    action="/add"
+                    method="POST"
+                    id="add-form"
+                    enctype="multipart/form-data"
+                >
+                    <h2>Add New User</h2>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            placeholder="Enter Name"
+                            name="name"
+                        />
+                        <% if(errors && errors.name){%>
+                        <span class="text-danger"><%= errors.name.msg %></span>
+                        <%}%>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            placeholder="Enter email"
+                            name="email"
+                        />
+                        <% if(errors && errors.email){%>
+                        <span class="text-danger"><%= errors.email.msg %></span>
+                        <%}%>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input
+                            type="password"
+                            class="form-control"
+                            id="password"
+                            placeholder="Password"
+                            name="password"
+                        />
+                        <% if(errors && errors.password){%>
+                        <span class="text-danger"
+                            ><%= errors.password.msg %></span
+                        >
+                        <%}%>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input
+                            type="phone"
+                            class="form-control"
+                            id="phone"
+                            placeholder="Ente Phone Number"
+                            name="phone"
+                        />
+                        <% if(errors && errors.phone){%>
+                        <span class="text-danger"><%= errors.phone.msg %></span>
+                        <%}%>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Select Image</label>
+                        <input
+                            type="file"
+                            class="form-control"
+                            id="image"
+                            name="image"
+                        />
+                        <% if(errors && errors.image){%>
+                        <span class="text-danger"><%= errors.image.msg %></span>
+                        <%}%>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="isAdmin"
+                                value="true"
+                            />
+                            Register as Admin
+                        </label>
+                    </div>
+                    <button type="submit" class="btn mt-3">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        var alert = document.getElementById("alert-msg");
+        if (alert) {
+            setTimeout(function () {
+                alert.style.display = "none";
+            }, 3000);
+        }
+    };
+</script>
+<%-include('footer')-%>

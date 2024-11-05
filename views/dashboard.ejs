@@ -1,0 +1,89 @@
+<%- include('header') %>
+
+<div class="container mt-5 pt-5">
+    <div class="row justify-content-center">
+        <div class="mt-5 border p-5">
+            <% if (message) { %>
+            <div
+                class="alert alert-dismissible fade show alert-<%= message.type %>"
+                id="alert-msg"
+                role="alert"
+            >
+                <%= message.message%>
+            </div>
+            <% } %>
+            <div class="row mb-3 justify-content-end">
+                <div class="col-auto">
+                    <a class="btn" href="/add">
+                        <i class="fa-solid fa-user"></i> Add User
+                    </a>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <% if (Array.isArray(users) && users.length > 0) { let i=0;%>
+                <table class="table table-striped mt-5 text-center">
+                    <thead>
+                        <tr>
+                            <th class="text-start">Sl No</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th class="text-start">Phone</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach((row,index)=>{%>
+
+                        <tr class="align-middle text-start">
+                            <td class="text-start"><%=i+1%></td>
+                            <td>
+                                <img
+                                    src="<%=row.image%>"
+                                    width="50"
+                                    class="img-thumbnail"
+                                    alt="test"
+                                />
+                            </td>
+                            <td><%=row.name%></td>
+                            <td><%=row.email%></td>
+                            <td class="text-start"><%=row.phone%></td>
+                            <td><%= row.isAdmin ? 'Admin' : 'User' %></td>
+                            <td>
+                                <a
+                                    href="/edit/<%=row._id%>"
+                                    class="text-success"
+                                    ><i
+                                        class="fa-solid fa-pen-to-square mx-1"
+                                    ></i></a
+                                >&emsp;
+                                <form
+                                    action="/delete/<%= row._id %>?_method=DELETE"
+                                    method="POST"
+                                    style="display: inline"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="text-danger"
+                                        onclick="return confirm('Are you sure you want to delete this user?');"
+                                    >
+                                        <i class="fa-solid fa-trash mx-1"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% i++;})%>
+                    </tbody>
+                </table>
+                <% }else{%>
+                <h1 class="text-center text-secondary mt-5">
+                    No users found in the database
+                </h1>
+                <% }%>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('footer') %>
